@@ -26,6 +26,9 @@ public class Goal {
     @Column(name = "t_fat")
     private Float fat;
 
+    @Column(name = "t_carbohydrate")
+    private Float carbohydrate;
+
     @OneToMany(mappedBy = "goal", cascade = CascadeType.ALL)
     private List<Person> persons;
 }
