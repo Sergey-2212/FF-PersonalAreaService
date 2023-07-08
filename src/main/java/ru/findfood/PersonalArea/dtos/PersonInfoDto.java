@@ -11,13 +11,13 @@ public class PersonInfoDto {
     @Schema(description = "Id основной анкеты пользователя", requiredMode = Schema.RequiredMode.REQUIRED)
     private Long personId;
 
-    @Schema(description = "Город", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+    @Schema(description = "Город", requiredMode = Schema.RequiredMode.NOT_REQUIRED, maxLength = 255)
     private String city;
 
-    @Schema(description = "Улица", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+    @Schema(description = "Улица", requiredMode = Schema.RequiredMode.NOT_REQUIRED, maxLength = 255)
     private String street;
 
-    @Schema(description = "Номер дома", requiredMode = Schema.RequiredMode.NOT_REQUIRED, example = "5/1")
+    @Schema(description = "Номер дома", requiredMode = Schema.RequiredMode.NOT_REQUIRED, maxLength = 50, example = "5/1")
     private String house;
 
     @Schema(description = "Номер квартиры", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
