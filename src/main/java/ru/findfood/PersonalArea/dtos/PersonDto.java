@@ -27,7 +27,7 @@ public class PersonDto {
     @Schema(description = "Id расширенной анкеты пользователя", requiredMode = Schema.RequiredMode.REQUIRED)
     private Long Info_id;
 
-    public PersonDto() {
+  public PersonDto() {
     }
 
     public PersonDto(Long id, String username, Sex sex, Date birthdate, Integer weight, Integer height, Activity activity_title, Goal goal_title, Long info_id) {
@@ -40,6 +40,7 @@ public class PersonDto {
         this.activity_title = activity_title;
         this.goal_title = goal_title;
         Info_id = info_id;
+
     }
 
     public Long getId() {
@@ -72,6 +73,7 @@ public class PersonDto {
 
     public void setBirthdate(Date birthdate) {
         this.birthdate = birthdate;
+
     }
 
     public Integer getWeight() {
@@ -113,4 +115,5 @@ public class PersonDto {
     public void setInfo_id(Long info_id) {
         Info_id = info_id;
     }
+
 }
