@@ -10,7 +10,7 @@ import ru.findfood.PersonalArea.enums.ActivityTitle;
 import java.util.List;
 
 @Entity
-@Table(name = "activity")
+@Table(name = "plActivity")
 @NoArgsConstructor
 @Getter
 @Setter
@@ -18,12 +18,12 @@ public class Activity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "actId")
     private Long id;
     @Enumerated(EnumType.STRING)
-    @Column(name = "t_title")
+    @Column(name = "actTitle")
     private ActivityTitle title;
-    @Column(name = "t_coefficient")
+    @Column(name = "actCoefficient")
     private Float coefficient;
 
     @OneToMany(mappedBy = "activity", cascade = CascadeType.ALL)
