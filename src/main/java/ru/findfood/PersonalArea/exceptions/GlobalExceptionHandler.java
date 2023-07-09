@@ -21,4 +21,9 @@ public class GlobalExceptionHandler {
         log.error(exception.getMessage());
         return new ResponseEntity<>(new AppError(HttpStatus.NOT_FOUND.value(), exception.getMessage()), HttpStatus.NOT_FOUND);
     }
+    @ExceptionHandler
+    public ResponseEntity<AppError> catchValidationErrorException (ValidationErrorException exception) {
+        log.error(exception.getMessage());
+        return new ResponseEntity<>(new AppError(HttpStatus.BAD_REQUEST.value(), exception.getMessage()), HttpStatus.BAD_REQUEST);
+    }
 }
