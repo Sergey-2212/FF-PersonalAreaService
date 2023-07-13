@@ -20,15 +20,15 @@ public class PersonInfo {
     @JoinColumn(name = "infPerson_id")
     private Person person;
 
-    @NotNull
+
     @Column(name = "infCity")
     private String city;
 
-    @NotNull
+
     @Column(name = "infStreet")
     private String street;
 
-    @NotNull
+
     @Column(name = "infHouse")
     private String house;
 
@@ -39,7 +39,7 @@ public class PersonInfo {
     @Column(name = "infIndex")
     private Integer index;
 
-    @NotNull
+
     @Column(name = "infPhoneNumber")
     private String phoneNumber;
 

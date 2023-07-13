@@ -18,6 +18,7 @@ public class PersonConverter {
     private final ActivityRepository activityRepository;
     private final GoalRepository goalRepository;
     private final PersonInfoRepository personInfoRepository;
+    private final PersonInfoConverter personInfoConverter;
 
     public PersonDto entityToDto (Person person) {
         log.info("entityToDTOConverter - " + person.toString());
@@ -28,17 +29,19 @@ public class PersonConverter {
                 person.getBirthdate(),
                 person.getWeight(),
                 person.getHeight(),
-                person.getActivity().toString(),
+                person.getActivity().getTitle().toString(),
                 person.getGoal().getTitle().toString(),
-                person.getPersonInfo().getId());
+                personInfoConverter.entityToDto(person.getPersonInfo()));
+
 
     }
 
     public Person dtoToEntity (PersonDto personDto) {
-        return new Person (
+        log.info("Person dtoToEntity");
+        Person person = new Person (
                 personDto.getId(),
                 personDto.getUsername(),
-                Sex.valueOf(personDto.getSex()), //throws IllegalArgumentException if isn't found.
+                Sex.getBySex(personDto.getSex()), //throws IllegalArgumentException if isn't found.
                 personDto.getBirthdate(),
                 personDto.getWeight(),
                 personDto.getHeight(),
@@ -46,10 +49,10 @@ public class PersonConverter {
                         () -> new NotFoundException("Activity is not found by title - " + personDto.getActivity_title())),
                 goalRepository.findByTitle(personDto.getGoal_title()).orElseThrow(
                         () -> new NotFoundException("Goal is not found by title - " + personDto.getGoal_title())),
-                personInfoRepository.findById(personDto.getInfo_id()).orElseThrow(
-                        () -> new NotFoundException("PersonInfoRepository isn't found by id - " + personDto.getInfo_id())
-                )
+                personInfoConverter.dtoToEntity(personDto.getInfo_dto())
         );
+        log.info("Person dtoToEntity - " + person);
+        return person;
     }
 
 }

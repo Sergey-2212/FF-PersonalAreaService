@@ -20,16 +20,19 @@ public class Activity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "actId")
     private Long id;
-    @Enumerated(EnumType.STRING)
+//    @Enumerated(EnumType.STRING)
+//    @Column(name = "actTitle")
+//    private ActivityTitle title;
+
     @Column(name = "actTitle")
-    private ActivityTitle title;
+    private String title;
     @Column(name = "actCoefficient")
     private Float coefficient;
 
     @OneToMany(mappedBy = "activity", cascade = CascadeType.ALL)
     private List<Person> persons;
 
-    public Activity(Long id, ActivityTitle title, Float coefficient) {
+    public Activity(Long id, String title, Float coefficient) {
         this.id = id;
         this.title = title;
         this.coefficient = coefficient;

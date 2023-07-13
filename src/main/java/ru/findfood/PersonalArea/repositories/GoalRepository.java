@@ -3,6 +3,7 @@ package ru.findfood.PersonalArea.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import ru.findfood.PersonalArea.entities.Goal;
+import ru.findfood.PersonalArea.enums.GoalTitle;
 
 import java.util.Optional;
 

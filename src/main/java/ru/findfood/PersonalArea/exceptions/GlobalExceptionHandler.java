@@ -16,14 +16,19 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(new AppError(HttpStatus.NOT_FOUND.value(), exception.getMessage()), HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler
-    public ResponseEntity<AppError> catchIllegalArgumentException (IllegalArgumentException exception) {
-        log.error(exception.getMessage());
-        return new ResponseEntity<>(new AppError(HttpStatus.NOT_FOUND.value(), exception.getMessage()), HttpStatus.NOT_FOUND);
-    }
+//    @ExceptionHandler
+//    public ResponseEntity<AppError> catchIllegalArgumentException (IllegalArgumentException exception) {
+//        log.error(exception.getMessage());
+//        return new ResponseEntity<>(new AppError(HttpStatus.NOT_FOUND.value(), exception.getMessage()), HttpStatus.NOT_FOUND);
+//    }
     @ExceptionHandler
     public ResponseEntity<AppError> catchValidationErrorException (ValidationErrorException exception) {
         log.error(exception.getMessage());
         return new ResponseEntity<>(new AppError(HttpStatus.BAD_REQUEST.value(), exception.getMessage()), HttpStatus.BAD_REQUEST);
+    }
+    @ExceptionHandler
+    public ResponseEntity<AppError> catchSecurityErrorException (SecurityErrorException exception) {
+        log.error(exception.getMessage());
+        return new ResponseEntity<>(new AppError(HttpStatus.FORBIDDEN.value(), exception.getMessage()), HttpStatus.FORBIDDEN);
     }
 }

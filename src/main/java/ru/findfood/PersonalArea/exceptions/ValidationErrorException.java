@@ -9,4 +9,7 @@ public class ValidationErrorException extends RuntimeException {
         super(errors.stream().collect(Collectors.joining(", ")));
     }
 
+    public ValidationErrorException(String message) {
+        super(message);
+    }
 }
