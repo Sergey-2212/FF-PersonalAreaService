@@ -1,21 +1,34 @@
 package ru.findfood.PersonalArea.enums;
 
+import ru.findfood.PersonalArea.entities.Activity;
+
+import java.util.Objects;
+
 public enum ActivityTitle {
 
-    MIN_ACTIVITY("Минимальная нагрузка"),
-    LOW_ACTIVITY("Легкая нагрузка"),
-    MEDIUM_ACTIVITY("Умеренная нагрузка"),
-    HIGH_ACTIVITY("Высокая нагрузка"),
-    EXTREME_ACTIVITY("Экстремальная нагрузка");
+    MIN_ACTIVITY("Min"),
+    LOW_ACTIVITY("Light"),
+    MEDIUM_ACTIVITY("Medium"),
+    HIGH_ACTIVITY("High"),
+    EXTREME_ACTIVITY("Extreme");
 
-    public String value;
+    public String title;
 
-    ActivityTitle(String value) {
-        this.value = value;
+    ActivityTitle(String title) {
+        this.title = title;
+    }
+
+    public static ActivityTitle getByTitle(String title) {
+        for (ActivityTitle value : values()) {
+            if (Objects.equals(value.title, title)) {
+                return value;
+            }
+        }
+        throw new IllegalArgumentException();
     }
 
     @Override
     public String toString() {
-        return value;
+        return title;
     }
 }

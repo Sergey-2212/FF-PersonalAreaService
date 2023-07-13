@@ -5,7 +5,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(description = "Модель расширенной анкеты пользователя")
 public class PersonInfoDto {
 
-    @Schema(description = "Id расширенной акеты ползователя", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Id расширенной акеты ползователя")
     private Long id;
 
     @Schema(description = "Id основной анкеты пользователя", requiredMode = Schema.RequiredMode.REQUIRED)
@@ -117,5 +117,20 @@ public class PersonInfoDto {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return "PersonInfoDto{" +
+                "id=" + id +
+                ", personId=" + personId +
+                ", city='" + city + '\'' +
+                ", street='" + street + '\'' +
+                ", house='" + house + '\'' +
+                ", apartment=" + apartment +
+                ", index=" + index +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 }

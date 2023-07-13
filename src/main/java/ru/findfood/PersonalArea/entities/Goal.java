@@ -17,9 +17,12 @@ public class Goal {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "goalId")
     private Long id;
-    @Enumerated(EnumType.STRING)
+//    @Enumerated(EnumType.STRING)
+//    @Column(name = "goalTitle")
+//    private GoalTitle title;
+
     @Column(name = "goalTitle")
-    private GoalTitle title;
+    private String title;
 
     @Column(name = "goalProtein")
     private Float protein;
@@ -33,7 +36,7 @@ public class Goal {
     @OneToMany(mappedBy = "goal", cascade = CascadeType.ALL)
     private List<Person> persons;
 
-    public Goal(Long id, GoalTitle title, Float protein, Float fat, Float carbohydrate) {
+    public Goal(Long id, String title, Float protein, Float fat, Float carbohydrate) {
         this.id = id;
         this.title = title;
         this.protein = protein;
