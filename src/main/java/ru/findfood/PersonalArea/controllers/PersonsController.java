@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import ru.findfood.PersonalArea.dtos.GoalDto;
 import ru.findfood.PersonalArea.dtos.PersonDto;
 import ru.findfood.PersonalArea.services.PersonService;
 
@@ -22,8 +23,12 @@ public class PersonsController {
     }
 
     @GetMapping("/personByTelegramName")
-    public PersonDto getPersonByTelegramName(@RequestHeader String username) {
-        return personService.getPersonByTelegramName(username);
+    public GoalDto getPersonByTelegramName(@RequestHeader String username) {
+        return personService.getGoalByTelegramName(username);
+    }
+    @GetMapping("/personByName")
+    public GoalDto getPersonByName(@RequestHeader String username) {
+        return personService.getGoalByName(username);
     }
 
     @PostMapping

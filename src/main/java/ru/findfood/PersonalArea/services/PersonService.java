@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.findfood.PersonalArea.converters.PersonConverter;
+import ru.findfood.PersonalArea.dtos.GoalDto;
 import ru.findfood.PersonalArea.dtos.PersonDto;
 import ru.findfood.PersonalArea.entities.PersonInfo;
 import ru.findfood.PersonalArea.exceptions.NotFoundException;
@@ -64,12 +65,19 @@ public class PersonService {
                         personConverter.dtoToEntity(dto)));
     }
 
-    public PersonDto getPersonByTelegramName(String username) {
+    public GoalDto getGoalByTelegramName(String username) {
         PersonInfo info = personInfoRepository.findByTelegramName(username)
                 .orElseThrow(() -> new NotFoundException("PersonInfo is not found by telegram name - " + username));
-        return personConverter.entityToDto(
+        return personConverter.entityToGoalDto(
                 personRepository.findByPersonInfo(info)
                         .orElseThrow(() -> new NotFoundException("Person is not found by personInfo - " + info))
+        );
+    }
+
+    public GoalDto getGoalByName(String username) {
+        return personConverter.entityToGoalDto(
+                personRepository.findPersonByUsername(username)
+                        .orElseThrow(() -> new NotFoundException("PersonInfo is not found by telegram name - " + username))
         );
     }
 }
