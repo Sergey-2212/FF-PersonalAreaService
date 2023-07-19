@@ -1,7 +1,6 @@
 package ru.findfood.PersonalArea.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -46,7 +45,10 @@ public class PersonInfo {
     @Column(name = "infEmail")
     private String email;
 
-    public PersonInfo(Long id, Person person, String city, String street, String house, Short apartment, Integer index, String phoneNumber, String email) {
+    @Column(name = "infTelegram_name")
+    private String telegramName;
+
+    public PersonInfo(Long id, Person person, String city, String street, String house, Short apartment, Integer index, String phoneNumber, String email, String telegramName) {
         this.id = id;
         this.person = person;
         this.city = city;
@@ -56,5 +58,6 @@ public class PersonInfo {
         this.index = index;
         this.phoneNumber = phoneNumber;
         this.email = email;
+        this.telegramName = telegramName;
     }
 }

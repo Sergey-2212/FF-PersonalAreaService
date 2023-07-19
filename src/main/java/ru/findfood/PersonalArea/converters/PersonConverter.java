@@ -3,7 +3,9 @@ package ru.findfood.PersonalArea.converters;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import ru.findfood.PersonalArea.dtos.GoalDto;
 import ru.findfood.PersonalArea.dtos.PersonDto;
+import ru.findfood.PersonalArea.entities.Goal;
 import ru.findfood.PersonalArea.entities.Person;
 import ru.findfood.PersonalArea.enums.Sex;
 import ru.findfood.PersonalArea.exceptions.NotFoundException;
@@ -20,7 +22,7 @@ public class PersonConverter {
     private final PersonInfoRepository personInfoRepository;
     private final PersonInfoConverter personInfoConverter;
 
-    public PersonDto entityToDto (Person person) {
+    public PersonDto entityToDto(Person person) {
         log.info("entityToDTOConverter - " + person.toString());
         return new PersonDto(
                 person.getId(),
@@ -32,13 +34,11 @@ public class PersonConverter {
                 person.getActivity().getTitle().toString(),
                 person.getGoal().getTitle().toString(),
                 personInfoConverter.entityToDto(person.getPersonInfo()));
-
-
     }
 
-    public Person dtoToEntity (PersonDto personDto) {
+    public Person dtoToEntity(PersonDto personDto) {
         log.info("Person dtoToEntity");
-        Person person = new Person (
+        Person person = new Person(
                 personDto.getId(),
                 personDto.getUsername(),
                 Sex.getBySex(personDto.getSex()), //throws IllegalArgumentException if isn't found.
@@ -55,4 +55,16 @@ public class PersonConverter {
         return person;
     }
 
+
+    public GoalDto entityToGoalDto(Person person) {
+        Goal goal = person.getGoal();
+        return new GoalDto(
+                goal.getTitle(),
+                goal.getCalories(),
+                goal.getProtein(),
+                goal.getFat(),
+                goal.getCarbohydrate(),
+                goal.getTimesToEat()
+        );
+    }
 }

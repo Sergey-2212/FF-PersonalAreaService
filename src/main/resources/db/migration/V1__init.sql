@@ -13,9 +13,10 @@ CREATE TYPE sex as ENUM ('male', 'female');
 CREATE TABLE IF NOT EXISTS pl_goal (
                                       goal_id serial UNIQUE,
                                       goal_title varchar(20),
-                                      goal_protein real,
-                                      goal_fat real,
-                                      goal_carbohydrate real
+                                      goal_protein int,
+                                      goal_fat int,
+                                      goal_carbohydrate int,
+                                      times_to_eat int
 );
 
 
@@ -42,6 +43,7 @@ CREATE TABLE IF NOT EXISTS tbl_personal_info (
                                                inf_index INTEGER,
                                                inf_phone_number varchar(20),
                                                inf_email varchar(255),
+                                               inf_telegram_name varchar(255),
                                                PRIMARY KEY (inf_id)
 );
 
