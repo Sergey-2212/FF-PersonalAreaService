@@ -42,6 +42,7 @@ CREATE TABLE IF NOT EXISTS tbl_personal_info (
                                                inf_index INTEGER,
                                                inf_phone_number varchar(20),
                                                inf_email varchar(255),
+                                               inf_telegram_name varchar(255),
                                                PRIMARY KEY (inf_id)
 );
 

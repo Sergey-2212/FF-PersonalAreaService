@@ -21,14 +21,17 @@ public class PersonsController {
         return personService.getPersonByUsername(username);
     }
 
+    @GetMapping("/personByTelegramName")
+    public PersonDto getPersonByTelegramName(@RequestHeader String username) {
+        return personService.getPersonByTelegramName(username);
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public PersonDto createNewPerson(@RequestBody PersonDto dto, @RequestHeader String username) {
-            if(!dto.getUsername().equals(username)) {
-                throw new SecurityException(String.format("Usernames of dto(%s) and header(%s) arn't match ", dto.getUsername(), username));
-            }
+        if (!dto.getUsername().equals(username)) {
+            throw new SecurityException(String.format("Usernames of dto(%s) and header(%s) aren't match ", dto.getUsername(), username));
+        }
         return personService.createPerson(dto);
     }
-
-
 }

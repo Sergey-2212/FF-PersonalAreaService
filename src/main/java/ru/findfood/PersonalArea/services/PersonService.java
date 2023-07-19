@@ -5,7 +5,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.findfood.PersonalArea.converters.PersonConverter;
 import ru.findfood.PersonalArea.dtos.PersonDto;
+import ru.findfood.PersonalArea.entities.PersonInfo;
 import ru.findfood.PersonalArea.exceptions.NotFoundException;
+import ru.findfood.PersonalArea.repositories.PersonInfoRepository;
 import ru.findfood.PersonalArea.repositories.PersonRepository;
 import ru.findfood.PersonalArea.validators.EntityValidator;
 
@@ -18,8 +20,10 @@ import java.util.stream.Collectors;
 public class PersonService {
 
     private final PersonRepository personRepository;
+    private final PersonInfoRepository personInfoRepository;
     private final EntityValidator validator;
     private final PersonConverter personConverter;
+
 
     public PersonDto getPersonByUsername(String username) {
         log.info("getPersonByUsername + " + username);
@@ -52,11 +56,20 @@ public class PersonService {
 
     public PersonDto createPerson(PersonDto dto) {
         dto.setId(null);
-        log.info("createPerson + \n " + dto.toString());
+        log.info("createPerson + \n " + dto);
         validator.checkPersonDto(dto);
         log.info("createPerson + personConverter.dtoToEntity(dto).toString()" + personConverter.dtoToEntity(dto).toString());
         return personConverter.entityToDto(
                 personRepository.save(
                         personConverter.dtoToEntity(dto)));
+    }
+
+    public PersonDto getPersonByTelegramName(String username) {
+        PersonInfo info = personInfoRepository.findByTelegramName(username)
+                .orElseThrow(() -> new NotFoundException("PersonInfo is not found by telegram name - " + username));
+        return personConverter.entityToDto(
+                personRepository.findByPersonInfo(info)
+                        .orElseThrow(() -> new NotFoundException("Person is not found by personInfo - " + info))
+        );
     }
 }

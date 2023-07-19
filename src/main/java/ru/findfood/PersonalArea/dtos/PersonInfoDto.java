@@ -32,6 +32,8 @@ public class PersonInfoDto {
     @Schema(description = "Электронная почта", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     private String email;
 
+    @Schema(description = "Имя пользователя в Telegram", requiredMode = Schema.RequiredMode.NOT_REQUIRED, pattern = "@.{5,32}")
+    private String telegramName;
     public PersonInfoDto() {
     }
 
@@ -117,6 +119,14 @@ public class PersonInfoDto {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getTelegramName() {
+        return telegramName;
+    }
+
+    public void setTelegramName(String telegramName) {
+        this.telegramName = telegramName;
     }
 
     @Override
