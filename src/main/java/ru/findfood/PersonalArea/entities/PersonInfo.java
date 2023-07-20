@@ -1,54 +1,50 @@
 package ru.findfood.PersonalArea.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "tblPersonalInfo")
+@Table(name = "tbl_person_info")
 @Data
 @NoArgsConstructor
 public class PersonInfo {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "infId")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "inf_id")
     private Long id;
 
-    @OneToOne
-    @JoinColumn(name = "infPerson_id")
+    @OneToOne(mappedBy = "personInfo")
+    @JoinColumn(name = "person_id")
     private Person person;
 
-
-    @Column(name = "infCity")
+    @Column(name = "inf_city")
     private String city;
 
-
-    @Column(name = "infStreet")
+    @Column(name = "inf_street")
     private String street;
 
 
-    @Column(name = "infHouse")
+    @Column(name = "inf_house")
     private String house;
 
-    @Column(name = "infApartment")
+    @Column(name = "inf_apartment")
     private Short apartment;
 
-
-    @Column(name = "infIndex")
+    @Column(name = "inf_index")
     private Integer index;
 
-
-    @Column(name = "infPhoneNumber")
+    @Column(name = "inf_phone_number")
     private String phoneNumber;
 
-    @Column(name = "infEmail")
+    @Column(name = "inf_email")
     private String email;
 
-    public PersonInfo(Long id, Person person, String city, String street, String house, Short apartment, Integer index, String phoneNumber, String email) {
+
+
+    public PersonInfo(Long id, String city, String street, String house, Short apartment, Integer index, String phoneNumber, String email) {
         this.id = id;
-        this.person = person;
         this.city = city;
         this.street = street;
         this.house = house;

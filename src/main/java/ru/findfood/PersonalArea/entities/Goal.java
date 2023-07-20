@@ -3,34 +3,33 @@ package ru.findfood.PersonalArea.entities;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.findfood.PersonalArea.enums.GoalTitle;
 
 import java.util.List;
 
 @Entity
 @Data
 @NoArgsConstructor
-@Table(name = "plGoal")
+@Table(name = "pl_goal")
 public class Goal {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "goalId")
+    @Column(name = "goal_id")
     private Long id;
 //    @Enumerated(EnumType.STRING)
 //    @Column(name = "goalTitle")
 //    private GoalTitle title;
 
-    @Column(name = "goalTitle")
+    @Column(name = "goal_title")
     private String title;
 
-    @Column(name = "goalProtein")
+    @Column(name = "goal_protein")
     private Float protein;
 
-    @Column(name = "goalFat")
+    @Column(name = "goal_fat")
     private Float fat;
 
-    @Column(name = "goalCarbohydrate")
+    @Column(name = "goal_carbohydrate")
     private Float carbohydrate;
 
     @OneToMany(mappedBy = "goal", cascade = CascadeType.ALL)
@@ -38,6 +37,13 @@ public class Goal {
 
     public Goal(Long id, String title, Float protein, Float fat, Float carbohydrate) {
         this.id = id;
+        this.title = title;
+        this.protein = protein;
+        this.fat = fat;
+        this.carbohydrate = carbohydrate;
+    }
+
+    public Goal(String title, Float protein, Float fat, Float carbohydrate) {
         this.title = title;
         this.protein = protein;
         this.fat = fat;
