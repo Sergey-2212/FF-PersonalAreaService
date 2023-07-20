@@ -8,9 +8,6 @@ public class PersonInfoDto {
     @Schema(description = "Id расширенной акеты ползователя")
     private Long id;
 
-    @Schema(description = "Id основной анкеты пользователя", requiredMode = Schema.RequiredMode.REQUIRED)
-    private Long personId;
-
     @Schema(description = "Город", requiredMode = Schema.RequiredMode.NOT_REQUIRED, maxLength = 255)
     private String city;
 
@@ -35,9 +32,8 @@ public class PersonInfoDto {
     public PersonInfoDto() {
     }
 
-    public PersonInfoDto(Long id, Long personId, String city, String street, String house, Short apartment, Integer index, String phoneNumber, String email) {
+    public PersonInfoDto(Long id, String city, String street, String house, Short apartment, Integer index, String phoneNumber, String email) {
         this.id = id;
-        this.personId = personId;
         this.city = city;
         this.street = street;
         this.house = house;
@@ -53,14 +49,6 @@ public class PersonInfoDto {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getPersonId() {
-        return personId;
-    }
-
-    public void setPersonId(Long personId) {
-        this.personId = personId;
     }
 
     public String getCity() {
@@ -123,7 +111,6 @@ public class PersonInfoDto {
     public String toString() {
         return "PersonInfoDto{" +
                 "id=" + id +
-                ", personId=" + personId +
                 ", city='" + city + '\'' +
                 ", street='" + street + '\'' +
                 ", house='" + house + '\'' +

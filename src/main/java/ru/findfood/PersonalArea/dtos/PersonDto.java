@@ -1,8 +1,8 @@
 package ru.findfood.PersonalArea.dtos;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.time.LocalDate;
 
-import java.util.Date;
 @Schema(description = "Модель анкеты пользователя")
 public class PersonDto {
     @Schema(description = "Id пользователя", requiredMode = Schema.RequiredMode.REQUIRED)
@@ -12,7 +12,7 @@ public class PersonDto {
     @Schema(description = "Пол пользователя", requiredMode = Schema.RequiredMode.REQUIRED)
     private String sex;
     @Schema(description = "Дата рождения", requiredMode = Schema.RequiredMode.REQUIRED)
-    private Date birthdate;
+    private LocalDate birthdate;
     @Schema(description = "Вес пользователя в килограммах", requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer weight;
     @Schema(description = "Рост пользователя", requiredMode = Schema.RequiredMode.REQUIRED)
@@ -27,7 +27,7 @@ public class PersonDto {
   public PersonDto() {
     }
 
-    public PersonDto(Long id, String username, String sex, Date birthdate, Integer weight, Integer height, String activity_title, String goal_title, PersonInfoDto info_dto) {
+    public PersonDto(Long id, String username, String sex, LocalDate birthdate, Integer weight, Integer height, String activity_title, String goal_title, PersonInfoDto info_dto) {
         this.id = id;
         this.username = username;
         this.sex = sex;
@@ -63,11 +63,11 @@ public class PersonDto {
         this.sex = sex;
     }
 
-    public Date getBirthdate() {
+    public LocalDate getBirthdate() {
         return birthdate;
     }
 
-    public void setBirthdate(Date birthdate) {
+    public void setBirthdate(LocalDate birthdate) {
         this.birthdate = birthdate;
     }
 
