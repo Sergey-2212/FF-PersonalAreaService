@@ -3,12 +3,12 @@ package ru.findfood.PersonalArea.validators;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import ru.findfood.PersonalArea.dtos.PersonDto;
-import ru.findfood.PersonalArea.dtos.PersonInfoDto;
 import ru.findfood.PersonalArea.enums.ActivityTitle;
 import ru.findfood.PersonalArea.enums.GoalTitle;
 import ru.findfood.PersonalArea.enums.Sex;
 import ru.findfood.PersonalArea.exceptions.ValidationErrorException;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -17,7 +17,7 @@ import java.util.List;
 public class EntityValidator {
 
 
-    private final Date BEGINING_OF_PREVIOUS_CENTURY = new Date(0,0,1);
+    private final LocalDate BEGINING_OF_PREVIOUS_CENTURY = LocalDate.of(1900,1,1);
 
     public void checkPersonDto (PersonDto dto) {
         List<String> errorList = new ArrayList<>();
@@ -30,7 +30,7 @@ public class EntityValidator {
         }
         log.info("dto - " + dto.getBirthdate().toString());
         log.info("Date - " + BEGINING_OF_PREVIOUS_CENTURY);
-        if(dto.getBirthdate().before(BEGINING_OF_PREVIOUS_CENTURY)) {
+        if(dto.getBirthdate().isBefore(BEGINING_OF_PREVIOUS_CENTURY)) {
             errorList.add("Birthdate is not valid - " + dto.getBirthdate());
         }
         if(dto.getWeight() <= 0) {
@@ -54,12 +54,6 @@ public class EntityValidator {
 
         if(!errorList.isEmpty()) {
             throw new ValidationErrorException(errorList);
-        }
-    }
-
-    public void checkPersonInfoDto (PersonInfoDto dto) {
-        if(dto.getPersonId() <= 0) {
-            throw new ValidationErrorException("PersonId is not valid - " + dto.getPersonId());
         }
     }
 
