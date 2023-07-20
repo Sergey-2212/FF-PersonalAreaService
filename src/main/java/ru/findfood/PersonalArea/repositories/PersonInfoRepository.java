@@ -9,4 +9,6 @@ public interface PersonInfoRepository extends JpaRepository<PersonInfo,Long> {
 
     @Override
     Optional<PersonInfo> findById(Long id);
+
+
 }
