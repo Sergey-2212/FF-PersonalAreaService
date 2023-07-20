@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.findfood.PersonalArea.converters.PersonConverter;
 import ru.findfood.PersonalArea.dtos.PersonDto;
+import ru.findfood.PersonalArea.entities.Person;
 import ru.findfood.PersonalArea.exceptions.NotFoundException;
 import ru.findfood.PersonalArea.repositories.PersonRepository;
 import ru.findfood.PersonalArea.validators.EntityValidator;
@@ -21,42 +22,45 @@ public class PersonService {
     private final EntityValidator validator;
     private final PersonConverter personConverter;
 
-    public PersonDto getPersonByUsername(String username) {
+    public Person getPersonByUsername(String username) {
         log.info("getPersonByUsername + " + username);
-        return personConverter.entityToDto(
-                personRepository.findPersonByUsername(username).orElseThrow(
-                        () -> new NotFoundException("Person is not found by username - " + username)
-                ));
+        return personRepository.findPersonByUsername(username).orElseThrow(
+                        () -> new NotFoundException("Person is not found by username - " + username));
     }
 
-    public PersonDto getPersonById(Long id) {
+    public Person getPersonById(Long id) {
         log.info("getPersonById + " + id);
-        return personConverter.entityToDto(
-                personRepository.findPersonById(id).orElseThrow(
-                        () -> new NotFoundException("Person is not found by Id - " + id)
-                ));
-
+        return personRepository.findPersonById(id).orElseThrow(
+                        () -> new NotFoundException("Person is not found by Id - " + id));
     }
 
-    public List<PersonDto> getAllPersons() {
-        return personRepository.findAll().stream().map(s -> personConverter.entityToDto(s)).collect(Collectors.toList());
+    public List<Person> getAllPersons() {
+        return personRepository.findAll();
     }
 
-    public PersonDto updatePerson(PersonDto dto) {
-        log.info("updatePerson + \n " + dto.toString());
+    public Person updatePerson(PersonDto dto) {
+        log.info("updatePerson + \n " + dto);
         validator.checkPersonDto(dto);
-        return personConverter.entityToDto(
-                personRepository.save(
-                        personConverter.dtoToEntity(dto)));
+        return personRepository.save(
+                        personConverter.dtoToEntity(dto));
     }
 
-    public PersonDto createPerson(PersonDto dto) {
+    public Person createNewPerson(PersonDto dto) {
         dto.setId(null);
-        log.info("createPerson + \n " + dto.toString());
+        log.info("createPerson + \n " + dto);
         validator.checkPersonDto(dto);
         log.info("createPerson + personConverter.dtoToEntity(dto).toString()" + personConverter.dtoToEntity(dto).toString());
-        return personConverter.entityToDto(
-                personRepository.save(
-                        personConverter.dtoToEntity(dto)));
+        return personRepository.save(
+                        personConverter.dtoToEntity(dto));
     }
+
+    public void removePersonById(Long id) {
+        personRepository.deleteById(id);
+    }
+
+    public void removePersonByUsername(String username) {
+        personRepository.deletePersonByUsername(username);
+
+    }
+
 }
