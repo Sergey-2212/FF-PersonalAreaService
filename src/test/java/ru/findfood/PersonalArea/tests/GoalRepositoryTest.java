@@ -24,10 +24,10 @@ public class GoalRepositoryTest {
         List<Goal> list = goalRepository.findAll();
         Goal testGoal = new Goal();
         testGoal.setId(1L);
-        testGoal.setCarbohydrate(1F);
-        testGoal.setFat(1F);
+        testGoal.setCarbohydrate(1);
+        testGoal.setFat(1);
         testGoal.setTitle("Keep");
-        testGoal.setProtein(1F);
+        testGoal.setProtein(1);
         testGoal.setPersons(Collections.emptyList());
 
         Assertions.assertEquals(list.size(), 3);

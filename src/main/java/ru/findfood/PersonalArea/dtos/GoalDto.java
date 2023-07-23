@@ -1,7 +1,7 @@
 package ru.findfood.PersonalArea.dtos;
 
-import io.swagger.v3.oas.annotations.media.Schema;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 
 @Schema(description = "Модель цели пользователя с точки зрения веса")
 public class GoalDto {
@@ -13,13 +13,13 @@ public class GoalDto {
     private String title;
 
     @Schema(description = "Коэффициент необходимого потребления белков", requiredMode = Schema.RequiredMode.REQUIRED)
-    private Float protein;
+    private Integer protein;
 
     @Schema(description = "Коэффициент необходимого потребления жиров", requiredMode = Schema.RequiredMode.REQUIRED)
-    private Float fat;
+    private Integer fat;
 
     @Schema(description = "Коэффициент необходимого потребления углеводов", requiredMode = Schema.RequiredMode.REQUIRED)
-    private Float carbohydrate;
+    private Integer carbohydrate;
 
     public GoalDto() {
     }
@@ -40,27 +40,28 @@ public class GoalDto {
         this.title = title;
     }
 
-    public Float getProtein() {
+    public Integer getProtein() {
         return protein;
     }
 
-    public void setProtein(Float protein) {
+    public void setProtein(Integer protein) {
         this.protein = protein;
     }
 
-    public Float getFat() {
+    public Integer getFat() {
         return fat;
     }
 
-    public void setFat(Float fat) {
+    public void setFat(Integer fat) {
         this.fat = fat;
     }
 
-    public Float getCarbohydrate() {
+    public Integer getCarbohydrate() {
         return carbohydrate;
     }
 
-    public void setCarbohydrate(Float carbohydrate) {
+    public void setCarbohydrate(Integer carbohydrate) {
         this.carbohydrate = carbohydrate;
     }
 }
+

@@ -60,7 +60,6 @@ CREATE TABLE IF NOT EXISTS tbl_person (
 ALTER TABLE tbl_person_info
     ADD FOREIGN KEY (person_id) REFERENCES tbl_person(prs_id);
 
-insert into tbl_person (prs_username, prs_sex, prs_birthdate, prs_weight, prs_height, prs_activity_id, prs_goal_id, prs_person_info_id)
-    VALUES
+
 
 

@@ -50,9 +50,9 @@ public class DataGenerator {
 
         //Создаю Goal
         List<Goal> goals = List.of(
-                new Goal(GoalTitle.LOSE_WEIGHT.toString(), 1F, 1F, 1F),
-                new Goal(GoalTitle.KEEP_WEIGHT.toString(), 2F, 2F, 2F),
-                new Goal(GoalTitle.GET_WEIGHT.toString(), 3F, 3F, 3F)
+                new Goal(GoalTitle.LOSE_WEIGHT.toString(), 1, 1, 1),
+                new Goal(GoalTitle.KEEP_WEIGHT.toString(), 2, 2, 2),
+                new Goal(GoalTitle.GET_WEIGHT.toString(), 3, 3, 3)
         );
         goalRepository.saveAll(goals);
 

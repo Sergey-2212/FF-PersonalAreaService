@@ -24,7 +24,8 @@ public class PersonInfoConverter {
         dto.setIndex(personInfo.getIndex());
         dto.setPhoneNumber(personInfo.getPhoneNumber());
         dto.setEmail(personInfo.getEmail());
-        log.info("PersonInfo entityToDto - " + dto.toString());
+        dto.setTelegramName(personInfo.getTelegramName());
+        log.info("PersonInfo entityToDto - " + dto);
         return dto;
 
     }
@@ -39,6 +40,7 @@ public class PersonInfoConverter {
         personInfo.setIndex(dto.getIndex());
         personInfo.setPhoneNumber(dto.getPhoneNumber());
         personInfo.setEmail(dto.getEmail());
+        personInfo.setTelegramName(dto.getTelegramName());
         return personInfo;
     }
 }

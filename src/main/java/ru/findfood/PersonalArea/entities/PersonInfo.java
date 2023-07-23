@@ -41,10 +41,12 @@ public class PersonInfo {
     @Column(name = "inf_email")
     private String email;
 
+    @Column(name = "inf_telegram_name")
+    private String telegramName;
 
-
-    public PersonInfo(Long id, String city, String street, String house, Short apartment, Integer index, String phoneNumber, String email) {
+    public PersonInfo(Long id, Person person, String city, String street, String house, Short apartment, Integer index, String phoneNumber, String email, String telegramName) {
         this.id = id;
+        this.person = person;
         this.city = city;
         this.street = street;
         this.house = house;
@@ -52,5 +54,6 @@ public class PersonInfo {
         this.index = index;
         this.phoneNumber = phoneNumber;
         this.email = email;
+        this.telegramName = telegramName;
     }
 }

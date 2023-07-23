@@ -7,11 +7,10 @@ import ru.findfood.PersonalArea.converters.PersonConverter;
 import ru.findfood.PersonalArea.dtos.PersonDto;
 import ru.findfood.PersonalArea.entities.Person;
 import ru.findfood.PersonalArea.exceptions.NotFoundException;
+import ru.findfood.PersonalArea.repositories.PersonInfoRepository;
 import ru.findfood.PersonalArea.repositories.PersonRepository;
 import ru.findfood.PersonalArea.validators.EntityValidator;
-
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -19,8 +18,10 @@ import java.util.stream.Collectors;
 public class PersonService {
 
     private final PersonRepository personRepository;
+    private final PersonInfoRepository personInfoRepository;
     private final EntityValidator validator;
     private final PersonConverter personConverter;
+
 
     public Person getPersonByUsername(String username) {
         log.info("getPersonByUsername + " + username);

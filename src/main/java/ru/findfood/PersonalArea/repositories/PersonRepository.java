@@ -3,6 +3,7 @@ package ru.findfood.PersonalArea.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import ru.findfood.PersonalArea.entities.Person;
+import ru.findfood.PersonalArea.entities.PersonInfo;
 
 import java.util.Optional;
 
@@ -10,5 +11,7 @@ import java.util.Optional;
 public interface PersonRepository extends JpaRepository<Person, Long> {
     Optional<Person> findPersonByUsername(String username);
     Optional<Person> findPersonById(Long id);
+
     void deletePersonByUsername(String username);
+    Optional<Person> findByPersonInfo(PersonInfo info);
 }

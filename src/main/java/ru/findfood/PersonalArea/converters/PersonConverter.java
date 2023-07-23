@@ -8,7 +8,6 @@ import ru.findfood.PersonalArea.dtos.PersonInfoDto;
 import ru.findfood.PersonalArea.entities.Person;
 import ru.findfood.PersonalArea.entities.PersonInfo;
 import ru.findfood.PersonalArea.enums.Sex;
-import ru.findfood.PersonalArea.exceptions.NotFoundException;
 import ru.findfood.PersonalArea.services.ActivityService;
 import ru.findfood.PersonalArea.services.GoalService;
 import ru.findfood.PersonalArea.services.PersonInfoService;
@@ -22,7 +21,7 @@ public class PersonConverter {
     private final PersonInfoService personInfoService;
     private final PersonInfoConverter personInfoConverter;
 
-    public PersonDto entityToDto (Person person) {
+    public PersonDto entityToDto(Person person) {
         log.info("entityToDTOConverter - " + person.toString());
         return new PersonDto(
                 person.getId(),
@@ -37,7 +36,7 @@ public class PersonConverter {
 
     }
 
-    public Person dtoToEntity (PersonDto personDto) {
+    public Person dtoToEntity(PersonDto personDto) {
         log.info("Person dtoToEntity");
         Person person = new Person();
             person.setId(personDto.getId());
@@ -51,7 +50,6 @@ public class PersonConverter {
                 person.setGoal(
                         goalService.getGoalByTitle(personDto.getGoal_title()));
                 person.setPersonInfo(checkPersonInfoOnNull(personDto.getInfo_dto(), person));
-
         log.info("Person dtoToEntity - " + person);
         return person;
     }
@@ -64,5 +62,6 @@ public class PersonConverter {
             return personInfoConverter.dtoToEntity(personInfoDto);
         }
     }
+
 
 }
