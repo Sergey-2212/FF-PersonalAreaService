@@ -9,7 +9,7 @@ import java.util.List;
 @Entity
 @Data
 @NoArgsConstructor
-@Table(name = "plGoal")
+@Table(name = "pl_goal")
 public class Goal {
     private final static int CALORIES_IN_PROTEIN = 4;
     private final static int CALORIES_IN_FAT = 9;
@@ -17,41 +17,41 @@ public class Goal {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "goalId")
+    @Column(name = "goal_id")
     private Long id;
 //    @Enumerated(EnumType.STRING)
 //    @Column(name = "goalTitle")
 //    private GoalTitle title;
 
-    @Column(name = "goalTitle")
+    @Column(name = "goal_title")
     private String title;
 
-    @Column(name = "goalProtein")
+    @Column(name = "goal_protein")
     private Integer protein;
 
-    @Column(name = "goalFat")
+    @Column(name = "goal_fat")
     private Integer fat;
 
-    @Column(name = "goalCarbohydrate")
+    @Column(name = "goal_carbohydrate")
     private Integer carbohydrate;
 
     @OneToMany(mappedBy = "goal", cascade = CascadeType.ALL)
     private List<Person> persons;
 
-    @Column(name = "timesTo_Eat")
+    @Column(name = "times_to_eat")
     private Integer timesToEat;
 
-    public Goal(Long id, String title, Integer protein, Integer fat, Integer carbohydrate) {
-        this.id = id;
+    public Goal(String title, Integer protein, Integer fat, Integer carbohydrate) {
         this.title = title;
         this.protein = protein;
         this.fat = fat;
         this.carbohydrate = carbohydrate;
     }
 
-    public int getCalories() {
+    public Integer getCalories() {
         return protein * CALORIES_IN_PROTEIN +
                 fat * CALORIES_IN_FAT +
                 carbohydrate * CALORIES_IN_CARBOHYDRATE;
-    }
+
+    };
 }

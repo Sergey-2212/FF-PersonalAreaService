@@ -1,7 +1,5 @@
 package ru.findfood.PersonalArea.enums;
 
-import ru.findfood.PersonalArea.entities.Activity;
-
 import java.util.Objects;
 
 public enum ActivityTitle {

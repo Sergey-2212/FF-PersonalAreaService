@@ -1,16 +1,14 @@
 package ru.findfood.PersonalArea.entities;
 
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import ru.findfood.PersonalArea.enums.ActivityTitle;
 
 import java.util.List;
 
 @Entity
-@Table(name = "plActivity")
+@Table(name = "pl_activity")
 @NoArgsConstructor
 @Getter
 @Setter
@@ -18,15 +16,15 @@ public class Activity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "actId")
+    @Column(name = "act_id")
     private Long id;
 //    @Enumerated(EnumType.STRING)
 //    @Column(name = "actTitle")
 //    private ActivityTitle title;
 
-    @Column(name = "actTitle")
+    @Column(name = "act_title")
     private String title;
-    @Column(name = "actCoefficient")
+    @Column(name = "act_coefficient")
     private Float coefficient;
 
     @OneToMany(mappedBy = "activity", cascade = CascadeType.ALL)
@@ -37,4 +35,10 @@ public class Activity {
         this.title = title;
         this.coefficient = coefficient;
     }
+
+    public Activity(String title, Float coefficient) {
+        this.title = title;
+        this.coefficient = coefficient;
+    }
+
 }

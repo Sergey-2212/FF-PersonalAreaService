@@ -10,5 +10,6 @@ public interface PersonInfoRepository extends JpaRepository<PersonInfo,Long> {
     @Override
     Optional<PersonInfo> findById(Long id);
 
-    Optional<PersonInfo> findByTelegramName(String username);
+    Optional<PersonInfo> findByTelegramName(String telegramName);
+
 }
