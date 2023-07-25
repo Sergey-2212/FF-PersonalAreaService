@@ -1,6 +1,9 @@
 package ru.findfood.PersonalArea.dtos;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 import java.time.LocalDate;
 
 @Schema(description = "Модель анкеты пользователя")
@@ -124,5 +127,19 @@ public class PersonDto {
                 ", goal_title=" + goal_title +
                 ", info_id=" + info_dto +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (!(o instanceof PersonDto dto)) return false;
+
+        return new EqualsBuilder().append(getId(), dto.getId()).append(getUsername(), dto.getUsername()).append(getSex(), dto.getSex()).append(getBirthdate(), dto.getBirthdate()).append(getWeight(), dto.getWeight()).append(getHeight(), dto.getHeight()).append(getActivity_title(), dto.getActivity_title()).append(getGoal_title(), dto.getGoal_title()).append(getInfo_dto(), dto.getInfo_dto()).isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37).append(getId()).append(getUsername()).append(getSex()).append(getBirthdate()).append(getWeight()).append(getHeight()).append(getActivity_title()).append(getGoal_title()).append(getInfo_dto()).toHashCode();
     }
 }
