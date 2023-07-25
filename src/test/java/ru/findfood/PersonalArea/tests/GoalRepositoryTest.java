@@ -12,7 +12,7 @@ import java.util.Collections;
 import java.util.List;
 
 @DataJpaTest
-@ActiveProfiles("test")
+//@ActiveProfiles("test")
 public class GoalRepositoryTest {
     @Autowired
     private GoalRepository goalRepository;
