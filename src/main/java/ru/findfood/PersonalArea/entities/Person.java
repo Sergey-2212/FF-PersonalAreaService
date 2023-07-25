@@ -3,6 +3,8 @@ package ru.findfood.PersonalArea.entities;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import ru.findfood.PersonalArea.enums.Sex;
@@ -61,5 +63,17 @@ public class Person {
     @Column(name = "prs_updated_at")
     private LocalDateTime updatedAt;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
 
+        if (!(o instanceof Person person)) return false;
+
+        return new EqualsBuilder().append(getId(), person.getId()).append(getUsername(), person.getUsername()).append(getPersonInfo(), person.getPersonInfo()).append(getSex(), person.getSex()).append(getBirthdate(), person.getBirthdate()).append(getWeight(), person.getWeight()).append(getHeight(), person.getHeight()).append(getActivity(), person.getActivity()).append(getGoal(), person.getGoal()).append(getCreatedAt(), person.getCreatedAt()).append(getUpdatedAt(), person.getUpdatedAt()).isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37).append(getId()).append(getUsername()).append(getPersonInfo()).append(getSex()).append(getBirthdate()).append(getWeight()).append(getHeight()).append(getActivity()).append(getGoal()).append(getCreatedAt()).append(getUpdatedAt()).toHashCode();
+    }
 }

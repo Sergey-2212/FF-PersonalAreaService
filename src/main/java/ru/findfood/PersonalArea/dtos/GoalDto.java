@@ -2,6 +2,8 @@ package ru.findfood.PersonalArea.dtos;
 
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 @Schema(description = "Модель цели пользователя с точки зрения веса")
 public class GoalDto {
@@ -62,6 +64,20 @@ public class GoalDto {
 
     public void setCarbohydrate(Integer carbohydrate) {
         this.carbohydrate = carbohydrate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (!(o instanceof GoalDto goalDto)) return false;
+
+        return new EqualsBuilder().append(getId(), goalDto.getId()).append(getTitle(), goalDto.getTitle()).append(getProtein(), goalDto.getProtein()).append(getFat(), goalDto.getFat()).append(getCarbohydrate(), goalDto.getCarbohydrate()).isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37).append(getId()).append(getTitle()).append(getProtein()).append(getFat()).append(getCarbohydrate()).toHashCode();
     }
 }
 

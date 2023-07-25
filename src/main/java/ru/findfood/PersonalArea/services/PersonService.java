@@ -18,7 +18,6 @@ import java.util.List;
 public class PersonService {
 
     private final PersonRepository personRepository;
-    private final PersonInfoRepository personInfoRepository;
     private final EntityValidator validator;
     private final PersonConverter personConverter;
 
@@ -50,7 +49,7 @@ public class PersonService {
         dto.setId(null);
         log.info("createPerson + \n " + dto);
         validator.checkPersonDto(dto);
-        log.info("createPerson + personConverter.dtoToEntity(dto).toString()" + personConverter.dtoToEntity(dto).toString());
+        //log.info("createPerson + personConverter.dtoToEntity(dto).toString()" + personConverter.dtoToEntity(dto).toString());
         return personRepository.save(
                         personConverter.dtoToEntity(dto));
     }
