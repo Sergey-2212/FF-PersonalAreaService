@@ -15,7 +15,7 @@ import ru.findfood.PersonalArea.validators.EntityValidator;
 @RequiredArgsConstructor
 public class PersonInfoService {
 
-    private PersonInfoRepository personInfoRepository;
+    private final PersonInfoRepository personInfoRepository;
 
     public PersonInfo getPersonInfoById (Long id) {
         return personInfoRepository.findById(id).orElseThrow(
