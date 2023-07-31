@@ -18,7 +18,6 @@ import ru.findfood.PersonalArea.services.PersonInfoService;
 public class PersonConverter {
     private final ActivityService activityService;
     private final GoalService goalService;
-    private final PersonInfoService personInfoService;
     private final PersonInfoConverter personInfoConverter;
 
     public PersonDto entityToDto(Person person) {
@@ -30,8 +29,8 @@ public class PersonConverter {
                 person.getBirthdate(),
                 person.getWeight(),
                 person.getHeight(),
-                person.getActivity().getTitle().toString(),
-                person.getGoal().getTitle().toString(),
+                person.getActivity().getTitle(),
+                person.getGoal().getTitle(),
                 personInfoConverter.entityToDto(person.getPersonInfo()));
 
     }
@@ -46,9 +45,9 @@ public class PersonConverter {
                 person.setWeight(personDto.getWeight());
                 person.setHeight(personDto.getHeight());
                 person.setActivity(
-                        activityService.getActivityByTitle(personDto.getActivity_title()));
+                        activityService.getByTitle(personDto.getActivity_title()));
                 person.setGoal(
-                        goalService.getGoalByTitle(personDto.getGoal_title()));
+                        goalService.getByTitle(personDto.getGoal_title()));
                 person.setPersonInfo(checkPersonInfoOnNull(personDto.getInfo_dto(), person));
         log.info("Person dtoToEntity - " + person);
         return person;
@@ -62,6 +61,5 @@ public class PersonConverter {
             return personInfoConverter.dtoToEntity(personInfoDto);
         }
     }
-
 
 }

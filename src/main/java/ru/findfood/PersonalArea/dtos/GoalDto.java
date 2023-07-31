@@ -2,14 +2,13 @@ package ru.findfood.PersonalArea.dtos;
 
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.EqualsAndHashCode;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+@EqualsAndHashCode
 @Schema(description = "Модель цели пользователя с точки зрения веса")
 public class GoalDto {
-
-    @Schema(description = "id перечисления в БД", requiredMode = Schema.RequiredMode.AUTO)
-    private Long id;
 
     @Schema(description = "Описание цели пользования сервисом")
     private String title;
@@ -23,15 +22,18 @@ public class GoalDto {
     @Schema(description = "Коэффициент необходимого потребления углеводов", requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer carbohydrate;
 
+    @Schema(description = "Необходимое количество каллорий", requiredMode = Schema.RequiredMode.AUTO)
+    private Integer calories;
+
     public GoalDto() {
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public GoalDto(String title, Integer protein, Integer fat, Integer carbohydrate, Integer calories) {
+        this.title = title;
+        this.protein = protein;
+        this.fat = fat;
+        this.carbohydrate = carbohydrate;
+        this.calories = calories;
     }
 
     public String getTitle() {
@@ -66,18 +68,12 @@ public class GoalDto {
         this.carbohydrate = carbohydrate;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-
-        if (!(o instanceof GoalDto goalDto)) return false;
-
-        return new EqualsBuilder().append(getId(), goalDto.getId()).append(getTitle(), goalDto.getTitle()).append(getProtein(), goalDto.getProtein()).append(getFat(), goalDto.getFat()).append(getCarbohydrate(), goalDto.getCarbohydrate()).isEquals();
+    public Integer getCalories() {
+        return calories;
     }
 
-    @Override
-    public int hashCode() {
-        return new HashCodeBuilder(17, 37).append(getId()).append(getTitle()).append(getProtein()).append(getFat()).append(getCarbohydrate()).toHashCode();
+    public void setCalories(Integer calories) {
+        this.calories = calories;
     }
 }
 

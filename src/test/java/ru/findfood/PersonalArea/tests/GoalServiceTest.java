@@ -51,21 +51,27 @@ public class GoalServiceTest {
         Goal goal = getTestEntity(2L);
         Mockito.doReturn(Optional.of(goal)).when(goalRepository).findById(2L);
         Mockito.doThrow(NotFoundException.class).when(goalRepository).findById(3L);
-        Assertions.assertEquals(getTestEntity(2L), goalService.getGoalById(2L));
-        Assertions.assertThrows(NotFoundException.class, () -> goalService.getGoalById(3L));
+        Assertions.assertEquals(getTestEntity(2L), goalService.getById(2L));
+        Assertions.assertThrows(NotFoundException.class, () -> goalService.getById(3L));
 
     }
     @Test
-    public void getGoalByTitleTest() {
+    public void getByTitleTest() {
         Goal goal = getTestEntity(2L);
         Mockito.doReturn(Optional.of(goal)).when(goalRepository).findByTitle(GoalTitle.GET_WEIGHT.toString());
         Mockito.doThrow(NotFoundException.class).when(goalRepository).findByTitle("title");
-        Assertions.assertEquals(GoalTitle.GET_WEIGHT, goalService.getGoalByTitle(GoalTitle.GET_WEIGHT.title));
-        Assertions.assertThrows(NotFoundException.class, () -> goalService.getGoalByTitle("title"));
+        Assertions.assertEquals(GoalTitle.GET_WEIGHT, goalService.getByTitle(GoalTitle.GET_WEIGHT.title));
+        Assertions.assertThrows(NotFoundException.class, () -> goalService.getByTitle("title"));
     }
     @Test
-    public void getListOfGoalTitles() {
+    public void getAllTitlesTest() {
         Mockito.doReturn(getTestEntityList()).when(goalRepository).findAll();
-        Assertions.assertEquals(getTitleList(), goalService.getListOfGoalTitles());
+        Assertions.assertEquals(getTitleList(), goalService.getAllTitles());
     }
+
+    public void getByUsernameTest() {
+
+    }
+
+
 }

@@ -1,6 +1,5 @@
 package ru.findfood.PersonalArea.tests;
 
-import jakarta.annotation.PostConstruct;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -16,7 +15,6 @@ import ru.findfood.PersonalArea.entities.PersonInfo;
 import ru.findfood.PersonalArea.exceptions.NotFoundException;
 import ru.findfood.PersonalArea.repositories.PersonRepository;
 import ru.findfood.PersonalArea.services.PersonService;
-import ru.findfood.PersonalArea.utils.DataGenerator;
 import ru.findfood.PersonalArea.validators.EntityValidator;
 
 import java.util.ArrayList;
@@ -60,9 +58,9 @@ public class PersonServiceTest {
         Person person = getTestEntity(1L, "test");
         Mockito.doReturn(Optional.of(person)).when(personRepository).findPersonByUsername("test");
         Mockito.doThrow(new NotFoundException("getPersonByUsernameTest")).when(personRepository).findPersonByUsername("test1");
-        Person getByUsernamePerson = personService.getPersonByUsername("test");
+        Person getByUsernamePerson = personService.getByUsername("test");
         Assertions.assertEquals("test", getByUsernamePerson.getUsername());
-        Assertions.assertThrows(NotFoundException.class, () -> personService.getPersonByUsername("test1"), "getPersonByUsernameTesttest1");
+        Assertions.assertThrows(NotFoundException.class, () -> personService.getByUsername("test1"), "getPersonByUsernameTesttest1");
     }
 
     @Test
@@ -70,9 +68,9 @@ public class PersonServiceTest {
         Person person = getTestEntity(1L, "test");
         Mockito.doReturn(Optional.of(person)).when(personRepository).findPersonById(1L);
         Mockito.doThrow(new NotFoundException("getPersonByIdTest")).when(personRepository).findPersonById(2L);
-        person = personService.getPersonById(1L);
+        person = personService.getById(1L);
         Assertions.assertEquals("test", person.getUsername());
-        Assertions.assertThrows(NotFoundException.class,() -> personService.getPersonById(2L),String.format("getPersonByIdTest%s" , 2L));
+        Assertions.assertThrows(NotFoundException.class,() -> personService.getById(2L),String.format("getPersonByIdTest%s" , 2L));
     }
 
     @Test
@@ -87,7 +85,7 @@ public class PersonServiceTest {
         Person person = getTestEntity(1L, "test");
         Mockito.doReturn(person).when(personConverter).dtoToEntity(dto);
         Mockito.doReturn(person).when(personRepository).save(person);
-        Person updatedPerson = personService.updatePerson(dto);
+        Person updatedPerson = personService.update(dto);
         Assertions.assertEquals("test", updatedPerson.getUsername());
     }
 
@@ -98,18 +96,18 @@ public class PersonServiceTest {
         inputDto.setId(1L);
         Mockito.doReturn(person).when(personConverter).dtoToEntity(new PersonDto());
         Mockito.doReturn(person).when(personRepository).save(person);
-        Person newPerson = personService.createNewPerson(inputDto);
+        Person newPerson = personService.create(inputDto);
         Assertions.assertEquals(1L, newPerson.getId());
     }
     @Test
     public void removePersonByIdTest() {
-        personService.removePersonById(1L);
+        personService.removeById(1L);
         Mockito.verify(personRepository, Mockito.times(1)).deleteById(1L);
     }
 
     @Test
     public void removePersonByUsernameTest() {
-        personService.removePersonByUsername("test");
+        personService.removeByUsername("test");
         Mockito.verify(personRepository, Mockito.times(1)).deletePersonByUsername("test");
     }
 }
