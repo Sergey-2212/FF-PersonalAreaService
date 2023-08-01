@@ -1,9 +1,9 @@
 package ru.findfood.PersonalArea.dtos;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
+import lombok.EqualsAndHashCode;
 
+@EqualsAndHashCode
 @Schema(description = "Модель расширенной анкеты пользователя")
 public class PersonInfoDto {
 
@@ -34,17 +34,6 @@ public class PersonInfoDto {
     @Schema(description = "Имя пользователя в Telegram", requiredMode = Schema.RequiredMode.NOT_REQUIRED, pattern = "@.{5,32}")
     private String telegramName;
     public PersonInfoDto() {
-    }
-
-    public PersonInfoDto(Long id, String city, String street, String house, Short apartment, Integer index, String phoneNumber, String email) {
-        this.id = id;
-        this.city = city;
-        this.street = street;
-        this.house = house;
-        this.apartment = apartment;
-        this.index = index;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
     }
 
     public Long getId() {
@@ -131,19 +120,5 @@ public class PersonInfoDto {
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", email='" + email + '\'' +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-
-        if (!(o instanceof PersonInfoDto dto)) return false;
-
-        return new EqualsBuilder().append(getId(), dto.getId()).append(getCity(), dto.getCity()).append(getStreet(), dto.getStreet()).append(getHouse(), dto.getHouse()).append(getApartment(), dto.getApartment()).append(getIndex(), dto.getIndex()).append(getPhoneNumber(), dto.getPhoneNumber()).append(getEmail(), dto.getEmail()).append(getTelegramName(), dto.getTelegramName()).isEquals();
-    }
-
-    @Override
-    public int hashCode() {
-        return new HashCodeBuilder(17, 37).append(getId()).append(getCity()).append(getStreet()).append(getHouse()).append(getApartment()).append(getIndex()).append(getPhoneNumber()).append(getEmail()).append(getTelegramName()).toHashCode();
     }
 }
