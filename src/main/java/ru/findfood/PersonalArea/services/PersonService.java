@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import ru.findfood.PersonalArea.converters.PersonConverter;
 import ru.findfood.PersonalArea.dtos.PersonDto;
 import ru.findfood.PersonalArea.entities.Person;
+import ru.findfood.PersonalArea.entities.PersonInfo;
 import ru.findfood.PersonalArea.exceptions.NotFoundException;
 import ru.findfood.PersonalArea.repositories.PersonRepository;
 import ru.findfood.PersonalArea.validators.EntityValidator;
@@ -19,6 +20,8 @@ public class PersonService {
     private final PersonRepository personRepository;
     private final EntityValidator validator;
     private final PersonConverter personConverter;
+
+    private final PersonInfoService personInfoService;
 
     public Person getByUsername(String username) {
         log.info("getPersonByUsername + " + username);
@@ -59,6 +62,14 @@ public class PersonService {
     public void removeByUsername(String username) {
         personRepository.deletePersonByUsername(username);
 
+    }
+
+    public PersonDto getPersonByTelegramName(String username) {
+        PersonInfo info = personInfoService.findByTelegramName(username);
+        return personConverter.entityToDto(
+                personRepository.findByPersonInfo(info)
+                        .orElseThrow(() -> new NotFoundException("Person is not found by personInfo - " + info))
+        );
     }
 
 }
