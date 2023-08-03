@@ -42,7 +42,7 @@ public class ActivityController {
     @GetMapping("/titles/all")
     public ListResponse<String> getAllActivityTitles() {
         ListResponse<String> list = new ListResponse<>();
-        list.setList(activityService.listOfActivityTitles());
+        list.setList(activityService.getAllTitles());
         return list;
     }
 
@@ -77,7 +77,7 @@ public class ActivityController {
     )
     @GetMapping("/{title}")
     public ActivityDto getActivityByTitle(@PathVariable @Parameter(name = "Имя активности", required = true) String title) {
-        return activityConverter.entityToDto(activityService.getActivityByTitle(title));
+        return activityConverter.entityToDto(activityService.getByTitle(title));
     }
 
 }

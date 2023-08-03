@@ -15,8 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.findfood.PersonalArea.converters.GoalConverter;
 import ru.findfood.PersonalArea.dtos.GoalDto;
 import ru.findfood.PersonalArea.dtos.ListResponse;
+import ru.findfood.PersonalArea.entities.Person;
 import ru.findfood.PersonalArea.exceptions.AppError;
 import ru.findfood.PersonalArea.services.GoalService;
+import ru.findfood.PersonalArea.services.PersonInfoService;
+import ru.findfood.PersonalArea.services.PersonService;
 
 @RestController
 @RequiredArgsConstructor
@@ -25,6 +28,8 @@ import ru.findfood.PersonalArea.services.GoalService;
 public class GoalController {
 
     private final GoalService goalService;
+    private final PersonService personService;
+    private final PersonInfoService personInfoService;
     private final GoalConverter goalConverter;
 
     @Operation(
@@ -39,13 +44,13 @@ public class GoalController {
     @GetMapping("/titles/all")
     public ListResponse<String> getAllGoalTitles() {
         ListResponse<String> list = new ListResponse<>();
-        list.setList(goalService.getListOfGoalTitles());
+        list.setList(goalService.getAllTitles());
         return list;
     }
 
 
     @Operation(
-            summary = "Получение полного описания цели с коэффициентами КБЖУ по имени цели",
+            summary = "Получение коэффициентов КБЖУ по названию цели",
             responses = {
                     @ApiResponse(
                             description = "Успешный ответ", responseCode = "200",
@@ -60,6 +65,45 @@ public class GoalController {
     @GetMapping("/{title}")
     public GoalDto getGoalByTitle(@PathVariable @Parameter(name = "Имя цели", required = true) String title) {
         return goalConverter.entityToDto(
-                goalService.getGoalByTitle(title));
+                goalService.getByTitle(title));
+    }
+
+    @Operation(
+            summary = "Получение коэффициентов КБЖУ по username пользователя в сервисе",
+            responses = {
+            @ApiResponse(
+                    description = "Успешный ответ", responseCode = "200",
+                    content = @Content(schema = @Schema(implementation = GoalDto.class))
+            ),
+            @ApiResponse(
+                    description = "Цель не найдена", responseCode = "400",
+                    content = @Content(schema = @Schema(implementation = AppError.class))
+            )
+    }
+    )
+    @GetMapping("/app/{username}")
+    public GoalDto getGoalByUsername(@PathVariable String username) {
+        Person person = personService.getByUsername(username);
+        return goalConverter.entityToDto(person.getGoal());
+
+    }
+
+    @Operation(
+            summary = "Получение коэффициентов КБЖУ по имени пользователя в Telegram",
+            responses = {
+                    @ApiResponse(
+                            description = "Успешный ответ", responseCode = "200",
+                            content = @Content(schema = @Schema(implementation = GoalDto.class))
+                    ),
+                    @ApiResponse(
+                            description = "Цель не найдена", responseCode = "400",
+                            content = @Content(schema = @Schema(implementation = AppError.class))
+                    )
+            }
+    )
+    @GetMapping("/telegram/{username}")
+    public GoalDto getGoalByTelegramName(@PathVariable String username) {
+        Person person = personInfoService.getByTelegramName(username).getPerson();
+        return goalConverter.entityToDto(person.getGoal());
     }
 }

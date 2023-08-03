@@ -53,5 +53,5 @@ public class Goal {
                 fat * CALORIES_IN_FAT +
                 carbohydrate * CALORIES_IN_CARBOHYDRATE;
 
-    };
+    }
 }

@@ -39,7 +39,7 @@ public class PersonController {
     )
     @GetMapping()
     public PersonDto getPerson(@RequestHeader @Parameter(description = "Логин пользователя", required = true) String username) {
-        return personConverter.entityToDto(personService.getPersonByUsername(username));
+        return personConverter.entityToDto(personService.getByUsername(username));
     }
     @Operation(
             summary = "Запрос на создание новой анкеты пользователя",
@@ -61,7 +61,7 @@ public class PersonController {
             if(!dto.getUsername().equals(username)) {
                 throw new SecurityException(String.format("Usernames of dto(%s) and header(%s) arn't match ", dto.getUsername(), username));
             }
-        return personConverter.entityToDto(personService.createNewPerson(dto));
+        return personConverter.entityToDto(personService.create(dto));
     }
 
     @Operation(
@@ -85,7 +85,7 @@ public class PersonController {
             if(!dto.getUsername().equals(username)) {
                 throw new SecurityException(String.format("Usernames of dto(%s) and header(%s) aren't match ", dto.getUsername(), username));
              }
-        return personConverter.entityToDto(personService.updatePerson(dto));
+        return personConverter.entityToDto(personService.update(dto));
     }
 
     @Operation(
@@ -103,8 +103,14 @@ public class PersonController {
     )
     @DeleteMapping()
     public void removePersonByUsername(@RequestHeader @Parameter(description = "Логин пользователя", required = true) String username) {
-        personService.removePersonByUsername(username);
+        personService.removeByUsername(username);
     }
+
+    @GetMapping("/byTelegramName")
+    public PersonDto getByTelegramName(@RequestHeader String username) {
+        return personConverter.entityToDto(personService.getByTelegramName(username));
+    }
+
 
 
 }
