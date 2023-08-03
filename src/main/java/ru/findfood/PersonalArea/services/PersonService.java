@@ -64,12 +64,10 @@ public class PersonService {
 
     }
 
-    public PersonDto getPersonByTelegramName(String username) {
-        PersonInfo info = personInfoService.findByTelegramName(username);
-        return personConverter.entityToDto(
-                personRepository.findByPersonInfo(info)
-                        .orElseThrow(() -> new NotFoundException("Person is not found by personInfo - " + info))
-        );
+    public Person getByTelegramName(String username) {
+        PersonInfo info = personInfoService.getByTelegramName(username);
+        return personRepository.findByPersonInfo(info).orElseThrow(
+                () -> new NotFoundException("Person is not found by Telegram name - " + username));
     }
 
 }

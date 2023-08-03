@@ -27,8 +27,4 @@ public class PersonInfoService {
         );
     }
 
-    public PersonInfo findByTelegramName(String username) {
-        return personInfoRepository.findByTelegramName(username).orElseThrow(
-                () -> new NotFoundException("PersonInfo is not found by username - " + username));
-    }
 }
