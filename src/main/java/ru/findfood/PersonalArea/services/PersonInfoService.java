@@ -7,6 +7,8 @@ import ru.findfood.PersonalArea.entities.PersonInfo;
 import ru.findfood.PersonalArea.exceptions.NotFoundException;
 import ru.findfood.PersonalArea.repositories.PersonInfoRepository;
 
+import java.util.Optional;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -24,4 +26,5 @@ public class PersonInfoService {
                 () -> new NotFoundException("PersonInfo is not found by telegram name - " + telegramName)
         );
     }
+
 }

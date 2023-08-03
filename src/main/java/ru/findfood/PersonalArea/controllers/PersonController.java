@@ -106,6 +106,11 @@ public class PersonController {
         personService.removeByUsername(username);
     }
 
+    @GetMapping("/byTelegramName")
+    public PersonDto getByTelegramName(@RequestHeader String username) {
+        return personConverter.entityToDto(personService.getByTelegramName(username));
+    }
+
 
 
 }
