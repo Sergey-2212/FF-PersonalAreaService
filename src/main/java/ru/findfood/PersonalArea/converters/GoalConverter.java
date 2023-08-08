@@ -9,6 +9,7 @@ public class GoalConverter {
 
     public GoalDto entityToDto (Goal goal) {
         GoalDto dto = new GoalDto();
+        dto.setId(goal.getId());
         dto.setTitle(goal.getTitle());
         dto.setCarbohydrate(goal.getCarbohydrate());
         dto.setFat(goal.getFat());

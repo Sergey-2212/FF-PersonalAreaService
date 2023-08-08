@@ -51,7 +51,7 @@ public class Person {
     private Activity activity;
 
     //@NotNull
-    @ManyToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "prs_goal_id")
     private Goal goal;
 

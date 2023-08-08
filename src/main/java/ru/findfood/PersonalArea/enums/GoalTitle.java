@@ -1,5 +1,7 @@
 package ru.findfood.PersonalArea.enums;
 
+import lombok.EqualsAndHashCode;
+
 import java.util.Objects;
 
 public enum GoalTitle {

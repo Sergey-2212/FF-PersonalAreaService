@@ -50,25 +50,6 @@ public class GoalController {
 
 
     @Operation(
-            summary = "Получение коэффициентов КБЖУ по названию цели",
-            responses = {
-                    @ApiResponse(
-                            description = "Успешный ответ", responseCode = "200",
-                            content = @Content(schema = @Schema(implementation = GoalDto.class))
-                            ),
-                    @ApiResponse(
-                            description = "Цель не найдена", responseCode = "400",
-                            content = @Content(schema = @Schema(implementation = AppError.class))
-                    )
-            }
-    )
-    @GetMapping("/{title}")
-    public GoalDto getGoalByTitle(@PathVariable @Parameter(name = "Имя цели", required = true) String title) {
-        return goalConverter.entityToDto(
-                goalService.getByTitle(title));
-    }
-
-    @Operation(
             summary = "Получение коэффициентов КБЖУ по username пользователя в сервисе",
             responses = {
             @ApiResponse(

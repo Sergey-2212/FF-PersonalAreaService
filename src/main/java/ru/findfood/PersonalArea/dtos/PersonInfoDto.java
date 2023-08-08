@@ -2,7 +2,9 @@ package ru.findfood.PersonalArea.dtos;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
+@ToString
 @EqualsAndHashCode
 @Schema(description = "Модель расширенной анкеты пользователя")
 public class PersonInfoDto {
@@ -108,17 +110,4 @@ public class PersonInfoDto {
         this.telegramName = telegramName;
     }
 
-    @Override
-    public String toString() {
-        return "PersonInfoDto{" +
-                "id=" + id +
-                ", city='" + city + '\'' +
-                ", street='" + street + '\'' +
-                ", house='" + house + '\'' +
-                ", apartment=" + apartment +
-                ", index=" + index +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", email='" + email + '\'' +
-                '}';
-    }
 }

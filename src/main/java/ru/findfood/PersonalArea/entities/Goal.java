@@ -35,8 +35,8 @@ public class Goal {
     @Column(name = "goal_carbohydrate")
     private Integer carbohydrate;
 
-    @OneToMany(mappedBy = "goal", cascade = CascadeType.ALL)
-    private List<Person> persons;
+    @OneToOne(mappedBy = "goal", cascade = CascadeType.ALL)
+    private Person person;
 
     @Column(name = "times_to_eat")
     private Integer timesToEat;

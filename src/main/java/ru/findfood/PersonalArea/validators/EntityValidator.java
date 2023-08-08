@@ -46,10 +46,10 @@ public class EntityValidator {
                 dto.getActivity_title().equals(ActivityTitle.MIN_ACTIVITY.toString()))) {
             errorList.add("Activity Title is not valid - " + dto.getActivity_title());
         }
-        if(!(dto.getGoal_title().equals(GoalTitle.GET_WEIGHT.toString()) ^
-                dto.getGoal_title().equals(GoalTitle.KEEP_WEIGHT.toString()) ^
-                dto.getGoal_title().equals(GoalTitle.LOSE_WEIGHT.toString()))) {
-            errorList.add("GoalTitle is not valid - " + dto.getGoal_title());
+        if(!(dto.getGoal().getTitle().equals(GoalTitle.GET_WEIGHT.toString()) ^
+                dto.getGoal().getTitle().equals(GoalTitle.KEEP_WEIGHT.toString()) ^
+                dto.getGoal().getTitle().equals(GoalTitle.LOSE_WEIGHT.toString()))) {
+            errorList.add("GoalTitle is not valid - " + dto.getGoal().getTitle());
         }
 
         if(!errorList.isEmpty()) {

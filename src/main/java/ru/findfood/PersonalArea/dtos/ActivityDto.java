@@ -2,7 +2,9 @@ package ru.findfood.PersonalArea.dtos;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
+@ToString
 @EqualsAndHashCode
 @Schema(description = "Модель уровня физической активности пользователя")
 public class ActivityDto {

@@ -22,3 +22,13 @@ spring:
       path: /h2
       settings:
         web-allow-others: true
+
+integrations:
+  menu-service:
+    url: http://localhost:8187/ff-menu
+    read-timeout: 10000
+    write-timeout: 5000
+    connect-timeout: 5000
+
+
+

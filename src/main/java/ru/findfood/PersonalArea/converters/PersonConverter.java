@@ -19,6 +19,7 @@ public class PersonConverter {
     private final ActivityService activityService;
     private final GoalService goalService;
     private final PersonInfoConverter personInfoConverter;
+    private final GoalConverter goalConverter;
 
     public PersonDto entityToDto(Person person) {
         log.info("entityToDTOConverter - " + person.toString());
@@ -30,7 +31,7 @@ public class PersonConverter {
                 person.getWeight(),
                 person.getHeight(),
                 person.getActivity().getTitle(),
-                person.getGoal().getTitle(),
+                goalConverter.entityToDto(person.getGoal()),
                 personInfoConverter.entityToDto(person.getPersonInfo()));
 
     }
@@ -47,7 +48,7 @@ public class PersonConverter {
                 person.setActivity(
                         activityService.getByTitle(personDto.getActivity_title()));
                 person.setGoal(
-                        goalService.getByTitle(personDto.getGoal_title()));
+                        goalService.getByPersonDto(personDto));
                 person.setPersonInfo(checkPersonInfoOnNull(personDto.getInfo_dto(), person));
         log.info("Person dtoToEntity - " + person);
         return person;

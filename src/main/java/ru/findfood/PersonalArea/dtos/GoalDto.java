@@ -3,13 +3,17 @@ package ru.findfood.PersonalArea.dtos;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 @EqualsAndHashCode
+@ToString
 @Schema(description = "Модель цели пользователя с точки зрения веса")
 public class GoalDto {
 
+    @Schema(description = "id цели в СУБД")
+    private Long id;
     @Schema(description = "Описание цели пользования сервисом")
     private String title;
 
@@ -34,6 +38,14 @@ public class GoalDto {
         this.fat = fat;
         this.carbohydrate = carbohydrate;
         this.calories = calories;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTitle() {
