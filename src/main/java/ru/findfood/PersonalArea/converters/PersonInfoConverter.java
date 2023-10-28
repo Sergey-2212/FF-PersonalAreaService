@@ -17,6 +17,9 @@ public class PersonInfoConverter {
     public PersonInfoDto entityToDto (PersonInfo personInfo) {
         PersonInfoDto dto = new PersonInfoDto();
         dto.setId(personInfo.getId());
+        dto.setFirstname(personInfo.getFirstname());
+        dto.setSurname(personInfo.getSurname());
+        dto.setLastname(personInfo.getLastname());
         dto.setCity(personInfo.getCity());
         dto.setStreet(personInfo.getStreet());
         dto.setHouse(personInfo.getHouse());
@@ -25,7 +28,9 @@ public class PersonInfoConverter {
         dto.setPhoneNumber(personInfo.getPhoneNumber());
         dto.setEmail(personInfo.getEmail());
         dto.setTelegramName(personInfo.getTelegramName());
-        log.info("PersonInfo entityToDto - " + dto);
+        dto.setCreatedAt(personInfo.getCreatedAt());
+        dto.setUpdatedAt(personInfo.getUpdatedAt());
+//        log.info("PersonInfo entityToDto - " + dto);
         return dto;
 
     }
@@ -33,6 +38,9 @@ public class PersonInfoConverter {
     public PersonInfo dtoToEntity (PersonInfoDto dto) {
         PersonInfo personInfo = new PersonInfo();
         personInfo.setId(dto.getId());
+        personInfo.setFirstname(dto.getFirstname());
+        personInfo.setSurname(dto.getSurname());
+        personInfo.setLastname(dto.getLastname());
         personInfo.setCity(dto.getCity());
         personInfo.setStreet(dto.getStreet());
         personInfo.setHouse(dto.getHouse());

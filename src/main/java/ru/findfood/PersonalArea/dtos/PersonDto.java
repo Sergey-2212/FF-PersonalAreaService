@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @EqualsAndHashCode
 @Schema(description = "Модель анкеты пользователя")
@@ -27,7 +28,8 @@ public class PersonDto {
     @Schema(description = "Расширенная анкета пользователя")
     private PersonInfoDto info_dto;
 
-  public PersonDto() {
+
+    public PersonDto() {
     }
 
     public PersonDto(Long id, String username, String sex, LocalDate birthdate, Integer weight, Integer height, String activity_title, String goal_title, PersonInfoDto info_dto) {
@@ -113,6 +115,10 @@ public class PersonDto {
     public void PersonInfoDto(PersonInfoDto infoDto) {
         this.info_dto = infoDto;
     }
+
+
+
+
 
     @Override
     public String toString() {

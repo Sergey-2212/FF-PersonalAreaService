@@ -1,14 +1,18 @@
 package ru.findfood.PersonalArea.entities;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import java.util.List;
+import java.util.Objects;
 
 @Entity
-@Data
-@NoArgsConstructor
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
+//@NoArgsConstructor
 @Table(name = "pl_goal")
 public class Goal {
     private final static int CALORIES_IN_PROTEIN = 4;
@@ -19,39 +23,50 @@ public class Goal {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "goal_id")
     private Long id;
-//    @Enumerated(EnumType.STRING)
-//    @Column(name = "goalTitle")
-//    private GoalTitle title;
 
     @Column(name = "goal_title")
     private String title;
 
     @Column(name = "goal_protein")
-    private Integer protein;
+    private Integer proteins;
 
     @Column(name = "goal_fat")
-    private Integer fat;
+    private Integer fats;
 
     @Column(name = "goal_carbohydrate")
-    private Integer carbohydrate;
+    private Integer carbohydrates;
 
-    @OneToMany(mappedBy = "goal", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "goal")
+    @ToString.Exclude
     private List<Person> persons;
 
     @Column(name = "times_to_eat")
     private Integer timesToEat;
 
-    public Goal(String title, Integer protein, Integer fat, Integer carbohydrate) {
+    public Goal(String title, Integer proteins, Integer fats, Integer carbohydrates) {
         this.title = title;
-        this.protein = protein;
-        this.fat = fat;
-        this.carbohydrate = carbohydrate;
+        this.proteins = proteins;
+        this.fats = fats;
+        this.carbohydrates = carbohydrates;
     }
 
     public Integer getCalories() {
-        return protein * CALORIES_IN_PROTEIN +
-                fat * CALORIES_IN_FAT +
-                carbohydrate * CALORIES_IN_CARBOHYDRATE;
+        return proteins * CALORIES_IN_PROTEIN +
+                fats * CALORIES_IN_FAT +
+                carbohydrates * CALORIES_IN_CARBOHYDRATE;
 
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Goal goal = (Goal) o;
+        return id != null && Objects.equals(id, goal.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 }

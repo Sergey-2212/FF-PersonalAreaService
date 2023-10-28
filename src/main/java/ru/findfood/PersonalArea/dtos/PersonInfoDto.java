@@ -1,7 +1,12 @@
 package ru.findfood.PersonalArea.dtos;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.Column;
 import lombok.EqualsAndHashCode;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.time.LocalDateTime;
 
 @EqualsAndHashCode
 @Schema(description = "Модель расширенной анкеты пользователя")
@@ -9,6 +14,15 @@ public class PersonInfoDto {
 
     @Schema(description = "Id расширенной акеты ползователя")
     private Long id;
+
+    @Schema(description = "Имя пользователя", requiredMode = Schema.RequiredMode.NOT_REQUIRED, example = "Иван")
+    private String firstname;
+
+    @Schema(description = "Отчество пользователя", requiredMode = Schema.RequiredMode.NOT_REQUIRED, example = "Иванович")
+    private String surname;
+
+    @Schema(description = "Фамилия пользователя", requiredMode = Schema.RequiredMode.NOT_REQUIRED, example = "Иванов")
+    private String lastname;
 
     @Schema(description = "Город", requiredMode = Schema.RequiredMode.NOT_REQUIRED, maxLength = 255)
     private String city;
@@ -33,6 +47,15 @@ public class PersonInfoDto {
 
     @Schema(description = "Имя пользователя в Telegram", requiredMode = Schema.RequiredMode.NOT_REQUIRED, pattern = "@.{5,32}")
     private String telegramName;
+
+    @CreationTimestamp
+    @Column(name = "prs_created_at")
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    @Column(name = "prs_updated_at")
+    private LocalDateTime updatedAt;
+
     public PersonInfoDto() {
     }
 
@@ -42,6 +65,30 @@ public class PersonInfoDto {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public String getCity() {
@@ -108,6 +155,22 @@ public class PersonInfoDto {
         this.telegramName = telegramName;
     }
 
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
     @Override
     public String toString() {
         return "PersonInfoDto{" +
@@ -121,4 +184,7 @@ public class PersonInfoDto {
                 ", email='" + email + '\'' +
                 '}';
     }
+
+
 }
+
