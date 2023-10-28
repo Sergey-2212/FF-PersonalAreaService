@@ -11,7 +11,8 @@ CREATE TABLE IF NOT EXISTS pl_goal (
 INSERT INTO pl_goal (goal_title, goal_protein, goal_fat,goal_carbohydrate) values
                                                                                ('Keep', 1, 1, 1),
                                                                                ('Lose', 2, 2, 2),
-                                                                               ('Get', 3, 3, 3);
+                                                                               ('Get', 3, 3, 3),
+                                                                               ('No data', 0, 0, 0);
 
 
 CREATE TABLE IF NOT EXISTS pl_activity (
@@ -25,10 +26,14 @@ INSERT INTO pl_activity (act_title, act_coefficient) VALUES
 ('Light', 2),
 ('Medium', 3),
 ('High', 4),
-('Extreme', 5);
+('Extreme', 5),
+('No data', 6);
 
 CREATE TABLE IF NOT EXISTS tbl_person_info (
                                                inf_id bigserial,
+                                               firstname varchar(255),
+                                               surname varchar(255),
+                                               lastname varchar(255),
                                                inf_city varchar(255),
                                                inf_street varchar(255),
                                                inf_house varchar(50),
@@ -37,6 +42,8 @@ CREATE TABLE IF NOT EXISTS tbl_person_info (
                                                inf_phone_number varchar(20),
                                                inf_email varchar(255),
                                                inf_telegram_name varchar(255),
+                                               prs_created_at timestamp DEFAULT current_timestamp,
+                                               prs_updated_at timestamp DEFAULT current_timestamp,
                                                PRIMARY KEY (inf_id)
 );
 

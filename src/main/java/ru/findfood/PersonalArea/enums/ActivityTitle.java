@@ -8,7 +8,8 @@ public enum ActivityTitle {
     LOW_ACTIVITY("Light"),
     MEDIUM_ACTIVITY("Medium"),
     HIGH_ACTIVITY("High"),
-    EXTREME_ACTIVITY("Extreme");
+    EXTREME_ACTIVITY("Extreme"),
+    NO_DATA("No data");
 
     public String title;
 

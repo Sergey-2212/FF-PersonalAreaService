@@ -13,4 +13,6 @@ public interface PersonInfoRepository extends JpaRepository<PersonInfo,Long> {
 
     Optional<PersonInfo> findByTelegramName(String telegramName);
 
+    Optional<PersonInfo> findByEmail(String email);
+
 }

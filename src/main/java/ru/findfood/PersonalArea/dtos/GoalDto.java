@@ -2,9 +2,8 @@ package ru.findfood.PersonalArea.dtos;
 
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.Column;
 import lombok.EqualsAndHashCode;
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 @EqualsAndHashCode
 @Schema(description = "Модель цели пользователя с точки зрения веса")
@@ -14,25 +13,28 @@ public class GoalDto {
     private String title;
 
     @Schema(description = "Коэффициент необходимого потребления белков", requiredMode = Schema.RequiredMode.REQUIRED)
-    private Integer protein;
+    private Integer proteins;
 
     @Schema(description = "Коэффициент необходимого потребления жиров", requiredMode = Schema.RequiredMode.REQUIRED)
-    private Integer fat;
+    private Integer fats;
 
     @Schema(description = "Коэффициент необходимого потребления углеводов", requiredMode = Schema.RequiredMode.REQUIRED)
-    private Integer carbohydrate;
+    private Integer carbohydrates;
 
     @Schema(description = "Необходимое количество каллорий", requiredMode = Schema.RequiredMode.AUTO)
     private Integer calories;
 
+    @Schema(description = "Количествоприемов пищи в день", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+    private Integer timesToEat;
+
     public GoalDto() {
     }
 
-    public GoalDto(String title, Integer protein, Integer fat, Integer carbohydrate, Integer calories) {
+    public GoalDto(String title, Integer proteins, Integer fats, Integer carbohydrates, Integer calories) {
         this.title = title;
-        this.protein = protein;
-        this.fat = fat;
-        this.carbohydrate = carbohydrate;
+        this.proteins = proteins;
+        this.fats = fats;
+        this.carbohydrates = carbohydrates;
         this.calories = calories;
     }
 
@@ -44,28 +46,28 @@ public class GoalDto {
         this.title = title;
     }
 
-    public Integer getProtein() {
-        return protein;
+    public Integer getProteins() {
+        return proteins;
     }
 
-    public void setProtein(Integer protein) {
-        this.protein = protein;
+    public void setProteins(Integer proteins) {
+        this.proteins = proteins;
     }
 
-    public Integer getFat() {
-        return fat;
+    public Integer getFats() {
+        return fats;
     }
 
-    public void setFat(Integer fat) {
-        this.fat = fat;
+    public void setFats(Integer fats) {
+        this.fats = fats;
     }
 
-    public Integer getCarbohydrate() {
-        return carbohydrate;
+    public Integer getCarbohydrates() {
+        return carbohydrates;
     }
 
-    public void setCarbohydrate(Integer carbohydrate) {
-        this.carbohydrate = carbohydrate;
+    public void setCarbohydrates(Integer carbohydrates) {
+        this.carbohydrates = carbohydrates;
     }
 
     public Integer getCalories() {
@@ -74,6 +76,14 @@ public class GoalDto {
 
     public void setCalories(Integer calories) {
         this.calories = calories;
+    }
+
+    public Integer getTimesToEat() {
+        return timesToEat;
+    }
+
+    public void setTimesToEat(Integer timesToEat) {
+        this.timesToEat = timesToEat;
     }
 }
 

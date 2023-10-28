@@ -6,7 +6,8 @@ public enum GoalTitle {
 
     KEEP_WEIGHT("Keep"),
     LOSE_WEIGHT("Lose"),
-    GET_WEIGHT("Get");
+    GET_WEIGHT("Get"),
+    NO_DATA("No data");
 
     public String title;
 

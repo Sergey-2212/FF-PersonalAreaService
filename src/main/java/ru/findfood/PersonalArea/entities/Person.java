@@ -28,6 +28,7 @@ public class Person {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "prs_person_info_id")
     private PersonInfo personInfo;
+
     //@NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "prs_sex")
@@ -46,12 +47,13 @@ public class Person {
     private Integer height;
 
     //@NotNull
-    @ManyToOne(cascade = CascadeType.ALL)
+//    @ManyToOne(cascade = CascadeType.ALL) НЕЛЬЗЯ - УДАЛЯЕТ ВСЕХ С ТАКИМ ЗНАЧЕНИЕМ
+    @ManyToOne
     @JoinColumn(name = "prs_activity_id")
     private Activity activity;
 
-    //@NotNull
-    @ManyToOne(cascade = CascadeType.ALL)
+
+    @ManyToOne
     @JoinColumn(name = "prs_goal_id")
     private Goal goal;
 

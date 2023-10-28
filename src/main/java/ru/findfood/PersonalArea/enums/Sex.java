@@ -4,7 +4,8 @@ import java.util.Objects;
 
 public enum Sex {
     FEMALE("female"),
-    MALE("male");
+    MALE("male"),
+    NO_DATA("No data");
 
     private String sex;
 
